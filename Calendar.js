@@ -41,7 +41,7 @@ var SamsonJSCalendar =
             9:'Октябрь',
             10:'Ноябрь',
             11:'Декабрь'
-        }
+        };
 
         var cYear = tYear;
         var cMonth = tMonth;
@@ -76,14 +76,14 @@ var SamsonJSCalendar =
         var getMaxDate = function(y, m) {
             if (m == 1) {
                 return y%4 || (!(y%100) && y%400 ) ? 28 : 29;
-            };
+            }
             return m===3 || m===5 || m===8 || m===10 ? 30 : 31;
         };
 
         var fillTable = function(y, m) {
             var fDate = new Date(y, m);
             sMonth = m+1;
-            if (sMonth<10) sMonth = '0'+sMonth
+            if (sMonth<10) sMonth = '0'+sMonth;
             var fDay = fDate.getDay() - 1;
             if (fDay < 0) fDay = 6;
             var maxDate = getMaxDate(y, m);
@@ -124,7 +124,7 @@ var SamsonJSCalendar =
                 if(activeRow) tableRow[i].css('display', 'block');
                 else tableRow[i].css('display', 'none');
             }
-        }
+        };
         s('input', obj).each(function(input){
             if(input.is('INPUT')) selected[input.val()] = input;
         });
@@ -132,7 +132,7 @@ var SamsonJSCalendar =
         this.clearTable = function(date){
             prevSelected = new Array(date);
             fillTable(tYear, tMonth);
-        }
+        };
 
         fillTable(cYear, cMonth);
 
@@ -140,7 +140,7 @@ var SamsonJSCalendar =
         s('.day-btn', table).click(function(cBtn){
             var day = cBtn.a('day');
             var sMonth = cMonth+1;
-            if (sMonth<10) sMonth = '0'+sMonth
+            if (sMonth<10) sMonth = '0'+sMonth;
             var key = cYear+'-'+sMonth+'-'+day;
 
 
@@ -212,6 +212,6 @@ var SamsonJSCalendar =
         //}
         return this;
     }
-}
+};
 //Добавим плагин к SamsonJS
 SamsonJS.extend( SamsonJSCalendar );
