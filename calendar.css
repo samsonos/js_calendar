@@ -1,6 +1,3 @@
-.s-calendar {
-    padding-top: 6px;
-}
 .sjs-calendar {
     font-family: "PTSansNarrow", sans-serif;
 }
@@ -20,7 +17,7 @@
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
-    font-family: "PTSansNarrow", sans-serif;
+    /*font-family: "PTSansNarrow", sans-serif;*/
 }
 .sjs-calendar > ul > li.selected {
     background-color: #bfebfb;
@@ -34,7 +31,7 @@
     color: #96d19b;
 }
 .sjs-calendar .sjs-c-week-header {
-    font-family: "PTSansNarrow", sans-serif;
+    /*font-family: "PTSansNarrow", sans-serif;*/
     margin-bottom: 9px;
 }
 .sjs-calendar .sjs-c-week-header > li {
@@ -59,7 +56,7 @@
     color: #535353;
     vertical-align: top;
     letter-spacing: 1px;
-    font-family: "PTSansNarrow", sans-serif;
+    /*font-family: "PTSansNarrow", sans-serif;*/
 }
 .sjs-calendar .sjs-c-header .sjs-c-right-arrow {
     display: inline-block;

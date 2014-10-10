@@ -22,6 +22,7 @@ var SamsonJSCalendar =
         var prevSelected = parametrs.selected ? parametrs.selected : new Array();
         var minToday = parametrs.mintoday ? parametrs.mintoday : false;
         var minDate = parametrs.mindate ? new Date(Date.parse(parametrs.mindate)) : false;
+        var clickHandler = parametrs.clickHandler ? parametrs.clickHandler : undefined;
         var minMonth = false;
         if(minDate){
             minMonth = Date.parse(minDate.getFullYear()+'/'+(minDate.getMonth()+1)+'/'+01);
@@ -167,6 +168,7 @@ var SamsonJSCalendar =
                     selected[key] = input;
                     obj.append(input);
                     cBtn.addClass('selected');
+                    if (clickHandler) clickHandler(cBtn, day, sMonth, cYear);
                 }
 
                 // Call click event handler
