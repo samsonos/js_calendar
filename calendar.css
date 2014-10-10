@@ -1,0 +1,71 @@
+.s-calendar {
+    padding-top: 6px;
+}
+.sjs-calendar {
+    font-family: "PTSansNarrow", sans-serif;
+}
+.sjs-calendar > ul {
+    text-align: center;
+}
+.sjs-calendar > ul > li {
+    width: 19px;
+    height: 19px;
+    line-height: 19px;
+    margin: 3px 5px;
+    cursor: pointer;
+    text-align: center;
+    vertical-align: top;
+    color: #535353;
+    font-size: 16px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    font-family: "PTSansNarrow", sans-serif;
+}
+.sjs-calendar > ul > li.selected {
+    background-color: #bfebfb;
+    color: #00427a;
+}
+.sjs-calendar > ul > li.active {
+    background-color: #F79980;
+    color: #FEF2F2;
+}
+.sjs-calendar > ul > li.today {
+    color: #96d19b;
+}
+.sjs-calendar .sjs-c-week-header {
+    font-family: "PTSansNarrow", sans-serif;
+    margin-bottom: 9px;
+}
+.sjs-calendar .sjs-c-week-header > li {
+    display: inline-block;
+    cursor: auto;
+    font-size: 14px;
+    margin-top: -1px;
+}
+.sjs-calendar .sjs-c-header .sjs-c-left-arrow {
+    display: inline-block;
+    width: 20%;
+    height: 23px;
+    background: url("img/c_left_arrow.png") no-repeat 100% 50%;
+    vertical-align: top;
+    cursor: pointer;
+}
+.sjs-calendar .sjs-c-header .sj-c-month {
+    display: inline-block;
+    width: 60%;
+    text-align: center;
+    font-size: 18px;
+    color: #535353;
+    vertical-align: top;
+    letter-spacing: 1px;
+    font-family: "PTSansNarrow", sans-serif;
+}
+.sjs-calendar .sjs-c-header .sjs-c-right-arrow {
+    display: inline-block;
+    width: 20%;
+    height: 23px;
+    background: url("img/c_right_arrow.png") no-repeat 10% 50%;
+    vertical-align: top;
+    cursor: pointer;
+}
