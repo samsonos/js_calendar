@@ -23,6 +23,7 @@ var SamsonJSCalendar =
         var minToday = parametrs.mintoday ? parametrs.mintoday : false;
         var minDate = parametrs.mindate ? new Date(Date.parse(parametrs.mindate)) : false;
         var clickHandler = parametrs.clickHandler ? parametrs.clickHandler : undefined;
+        var availableList = parametrs.availableList ? parametrs.availableList : undefined;
         var minMonth = false;
         if(minDate){
             minMonth = Date.parse(minDate.getFullYear()+'/'+(minDate.getMonth()+1)+'/'+01);
@@ -110,6 +111,13 @@ var SamsonJSCalendar =
                             else tableArray[i][j].removeClass('today');
                             if(prevSelected.indexOf(y+'-'+sMonth+'-'+sDay)!=-1) tableArray[i][j].addClass('active');
                             else tableArray[i][j].removeClass('active');
+
+                            if (availableList) {
+                                if(availableList.indexOf(y+'-'+sMonth+'-'+sDay)!=-1) tableArray[i][j].addClass('available');
+                                else tableArray[i][j].removeClass('available');
+                            } else{
+                                tableArray[i][j].addClass('available');
+                            }
                             tableArray[i][j].html(day++);
                             activeRow = true;
                         } else {
@@ -138,7 +146,7 @@ var SamsonJSCalendar =
         fillTable(cYear, cMonth);
 
         obj.append(table);
-        s('.day-btn', table).click(function(cBtn){
+        s('.day-btn.available', table).click(function(cBtn){
             var day = cBtn.a('day');
             var sMonth = cMonth+1;
             if (sMonth<10) sMonth = '0'+sMonth;
