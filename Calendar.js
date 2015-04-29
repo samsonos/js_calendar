@@ -15,22 +15,7 @@ var SamsonJSCalendar =
         var tMonth = tDate.getMonth();
         var tYear = tDate.getFullYear();
         var prevDate = false;
-
-
-        if(!parametrs) parametrs = {};
-        var multi = parametrs.multi ? parametrs.multi : false;
-        var prevSelected = parametrs.selected ? parametrs.selected : new Array();
-        var minToday = parametrs.mintoday ? parametrs.mintoday : false;
-        var minDate = parametrs.mindate ? new Date(Date.parse(parametrs.mindate)) : false;
-        var clickHandler = parametrs.clickHandler ? parametrs.clickHandler : undefined;
-        var availableList = parametrs.availableList ? parametrs.availableList : undefined;
-        var minMonth = false;
-        if(minDate){
-            minMonth = Date.parse(minDate.getFullYear()+'/'+(minDate.getMonth()+1)+'/'+01);
-            minDate = minDate.getTime();
-        }
-        var selected = {};
-        var monthName={
+        var monthNameDefaul={
             0:'Январь',
             1:'Февраль',
             2:'Март',
@@ -44,6 +29,23 @@ var SamsonJSCalendar =
             10:'Ноябрь',
             11:'Декабрь'
         };
+
+
+        if(!parametrs) parametrs = {};
+        var multi = parametrs.multi ? parametrs.multi : false;
+        var prevSelected = parametrs.selected ? parametrs.selected : new Array();
+        var minToday = parametrs.mintoday ? parametrs.mintoday : false;
+        var minDate = parametrs.mindate ? new Date(Date.parse(parametrs.mindate)) : false;
+        var clickHandler = parametrs.clickHandler ? parametrs.clickHandler : undefined;
+        var availableList = parametrs.availableList ? parametrs.availableList : undefined;
+        var monthName = parametrs.monthNames ? parametrs.monthNames : monthNameDefaul;
+        var minMonth = false;
+        if(minDate){
+            minMonth = Date.parse(minDate.getFullYear()+'/'+(minDate.getMonth()+1)+'/'+01);
+            minDate = minDate.getTime();
+        }
+        var selected = {};
+
 
         var cYear = tYear;
         var cMonth = tMonth;
