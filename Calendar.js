@@ -29,7 +29,7 @@ var SamsonJSCalendar =
             10:'Ноябрь',
             11:'Декабрь'
         };
-
+        var dayNameDefault = new Array('пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс');
 
         if(!parametrs) parametrs = {};
         var multi = parametrs.multi ? parametrs.multi : false;
@@ -39,6 +39,7 @@ var SamsonJSCalendar =
         var clickHandler = parametrs.clickHandler ? parametrs.clickHandler : undefined;
         var availableList = parametrs.availableList ? parametrs.availableList : undefined;
         var monthName = parametrs.monthNames ? parametrs.monthNames : monthNameDefaul;
+        var dayName = parametrs.dayNames ? parametrs.dayNames : dayNameDefault;
         var minMonth = false;
         if(minDate){
             minMonth = Date.parse(minDate.getFullYear()+'/'+(minDate.getMonth()+1)+'/'+01);
@@ -62,7 +63,12 @@ var SamsonJSCalendar =
         table.append(header);
         monthHeader.html(monthName[cMonth]+', '+cYear);
 
-        table.append(s('<ul class="sjs-c-week-header"><li>пн</li><li>вт</li><li>ср</li><li>чт</li><li>пт</li><li>сб</li><li>вс</li></ul>'));
+        var dayLIs = '';
+        for (i in dayName) {
+            dayLIs += '<li>'+ dayName[i] + '</li>';
+        }
+
+        table.append(s('<ul class="sjs-c-week-header">' + dayLIs + '</ul>'));
 
         for (var i = 0; i <= 5; i++) {
             tableRow[i] = s('<ul></ul>');
