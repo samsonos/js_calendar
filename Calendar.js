@@ -15,22 +15,7 @@ var SamsonJSCalendar =
         var tMonth = tDate.getMonth();
         var tYear = tDate.getFullYear();
         var prevDate = false;
-
-
-        if(!parametrs) parametrs = {};
-        var multi = parametrs.multi ? parametrs.multi : false;
-        var prevSelected = parametrs.selected ? parametrs.selected : new Array();
-        var minToday = parametrs.mintoday ? parametrs.mintoday : false;
-        var minDate = parametrs.mindate ? new Date(Date.parse(parametrs.mindate)) : false;
-        var clickHandler = parametrs.clickHandler ? parametrs.clickHandler : undefined;
-        var availableList = parametrs.availableList ? parametrs.availableList : undefined;
-        var minMonth = false;
-        if(minDate){
-            minMonth = Date.parse(minDate.getFullYear()+'/'+(minDate.getMonth()+1)+'/'+01);
-            minDate = minDate.getTime();
-        }
-        var selected = {};
-        var monthName={
+        var monthNameDefaul={
             0:'Январь',
             1:'Февраль',
             2:'Март',
@@ -44,6 +29,23 @@ var SamsonJSCalendar =
             10:'Ноябрь',
             11:'Декабрь'
         };
+
+
+        if(!parametrs) parametrs = {};
+        var multi = parametrs.multi ? parametrs.multi : false;
+        var prevSelected = parametrs.selected ? parametrs.selected : new Array();
+        var minToday = parametrs.mintoday ? parametrs.mintoday : false;
+        var minDate = parametrs.mindate ? new Date(Date.parse(parametrs.mindate)) : false;
+        var clickHandler = parametrs.clickHandler ? parametrs.clickHandler : undefined;
+        var availableList = parametrs.availableList ? parametrs.availableList : undefined;
+        var monthName = parametrs.monthNames ? parametrs.monthNames : monthNameDefaul;
+        var minMonth = false;
+        if(minDate){
+            minMonth = Date.parse(minDate.getFullYear()+'/'+(minDate.getMonth()+1)+'/'+01);
+            minDate = minDate.getTime();
+        }
+        var selected = {};
+
 
         var cYear = tYear;
         var cMonth = tMonth;
@@ -146,41 +148,42 @@ var SamsonJSCalendar =
         fillTable(cYear, cMonth);
 
         obj.append(table);
-        s('.day-btn.available', table).click(function(cBtn){
-            var day = cBtn.a('day');
-            var sMonth = cMonth+1;
-            if (sMonth<10) sMonth = '0'+sMonth;
-            var key = cYear+'-'+sMonth+'-'+day;
+        s('.day-btn', table).click(function(cBtn) {
+            if (cBtn.hasClass('available')) {
+                var day = cBtn.a('day');
+                var sMonth = cMonth + 1;
+                if (sMonth < 10) sMonth = '0' + sMonth;
+                var key = cYear + '-' + sMonth + '-' + day;
 
 
-            if (( !minToday || (Date.parse(cYear+'/'+(cMonth+1)+'/'+day)>=Date.parse(tYear+'/'+(tMonth+1)+'/'+tDay)))
-                &&( !minDate || (Date.parse(cYear+'/'+(cMonth+1)+'/'+day)>=minDate)) )
-            {
-                if (selected[key]){
-                    selected[key].remove();
-                    cBtn.removeClass('selected');
-                    selected[key] = false;
-                } else {
-                    if(!multi){
-                        for (var k in selected) {
-                            if(selected[k]){
-                                selected[k].remove();
-                                selected[k] = false;
+                if (( !minToday || (Date.parse(cYear + '/' + (cMonth + 1) + '/' + day) >= Date.parse(tYear + '/' + (tMonth + 1) + '/' + tDay)))
+                    && ( !minDate || (Date.parse(cYear + '/' + (cMonth + 1) + '/' + day) >= minDate))) {
+                    if (selected[key]) {
+                        selected[key].remove();
+                        cBtn.removeClass('selected');
+                        selected[key] = false;
+                    } else {
+                        if (!multi) {
+                            for (var k in selected) {
+                                if (selected[k]) {
+                                    selected[k].remove();
+                                    selected[k] = false;
+                                }
                             }
+                            if (prevDate) prevDate.removeClass('selected');
                         }
-                        if (prevDate) prevDate.removeClass('selected');
+                        prevDate = cBtn;
+
+                        var input = s('<input type="hidden" name="' + name + '[]" value="' + cYear + '-' + sMonth + '-' + day + '">');
+                        selected[key] = input;
+                        obj.append(input);
+                        cBtn.addClass('selected');
+                        if (clickHandler) clickHandler(cBtn, day, sMonth, cYear);
                     }
-                    prevDate = cBtn;
 
-                    var input = s('<input type="hidden" name="'+name+'[]" value="'+cYear+'-'+sMonth+'-'+day+'">');
-                    selected[key] = input;
-                    obj.append(input);
-                    cBtn.addClass('selected');
-                    if (clickHandler) clickHandler(cBtn, day, sMonth, cYear);
+                    // Call click event handler
+                    if (parametrs.click)parametrs.click(selected, day);
                 }
-
-                // Call click event handler
-                if(parametrs.click)parametrs.click(selected, day);
             }
         });
 
